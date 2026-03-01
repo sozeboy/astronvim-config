@@ -211,7 +211,7 @@ return {
       -- colorschema
       {
         "<leader>uC",
-        function() builtin.colorscheme() { layout = "select" } end,
+        function() builtin.colorscheme() end,
         desc = "Pick Color Schemes",
       },
       { "<leader>vh", function() require("snacks").picker.help() end, desc = "Help Pages" },
