@@ -1,3 +1,5 @@
+local builtin = require "telescope.builtin"
+
 return {
   -- HACK: docs @ https://github.com/folke/snacks.nvim/blob/main/docs
   {
@@ -170,28 +172,35 @@ return {
       -- find
       {
         "<leader><space>",
-        function() require("snacks").picker.smart() end,
-        desc = "Smart Find Files",
+        function() builtin.find_files() end,
+        desc = "Find Files",
       },
       {
         "<leader>fc",
-        function() require("snacks").picker.files { cwd = "~/.config/nvim/lua" } end,
-        desc = "Find Config File",
+        function() builtin.find_files() { cwd = "~/.config/nvim/lua" } end,
+        desc = "Find Config",
       },
-      { "<leader>/", function() require("snacks").picker.grep() end, desc = "Grep word" },
-      -- Snacks Picker
+      {
+        "<leader>/",
+        function() builtin.live_grep() end,
+        desc = "Grep word",
+      },
       {
         "<leader>fw",
-        function() require("snacks").picker.grep_word() end,
+        function() builtin.grep_string() end,
         desc = "Search Visual selection or Word",
         mode = { "n", "x" },
       },
       {
         "<leader>fk",
-        function() require("snacks").picker.keymaps() end,
-        desc = "Search Keymaps (Snacks Picker)",
+        function() builtin.keymaps() end,
+        desc = "Search keymaps",
       },
-
+      {
+        "<leader>fp",
+        function() require("snacks").picker.projects() end,
+        desc = "Projects",
+      },
       -- Git Stuff
       {
         "<leader>gbr",
@@ -202,11 +211,12 @@ return {
       -- colorschema
       {
         "<leader>uC",
-        function() require("snacks").picker.colorschemes { layout = "select" } end,
+        function() builtin.colorscheme() { layout = "select" } end,
         desc = "Pick Color Schemes",
       },
       { "<leader>vh", function() require("snacks").picker.help() end, desc = "Help Pages" },
       { "<leader>n", function() require("snacks").notifier.show_history() end, desc = "Notification History" },
+      { "<leader>:", function() builtin.command_history() end, desc = "Command History" },
     },
   },
   -- NOTE: todo comments w/ snacks
